@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    tools {
-        maven 'Maven3'
-    }
-
     stages {
         stage('Checkout') {
             steps {
@@ -16,7 +12,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                bat 'mvn clean package'
+                bat 'mvn clean compile'
             }
         }
 
@@ -28,10 +24,7 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                bat '''
-                for /f "tokens=5" %%a in ('netstat -ano ^| findstr :8082') do taskkill /F /PID %%a
-                start /B java -jar target\\DevOps_Ass_7-0.0.1-SNAPSHOT.jar
-                '''
+                bat 'java -jar target\\*.jar'
             }
         }
     }
