@@ -16,7 +16,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                bat 'mvn clean compile'
+                bat 'mvn clean package'
             }
         }
 
@@ -28,7 +28,7 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                bat 'java -jar target\\*.jar'
+                bat 'java -jar target\\DevOps_Ass_7-0.0.1-SNAPSHOT.jar'
             }
         }
     }
